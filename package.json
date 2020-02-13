@@ -2,10 +2,39 @@
   "name": "diffen",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "test"
+    "start": "NODE_ENV=prod DEBUG=prod:* npm run build && node build/app.js",
+    "dev": "NODE_ENV=dev DEBUG=dev:* nodemon --exec babel-node src/app.js",
+    "build": "./node_modules/.bin/babel src --out-dir ./build --source-maps",
+    "test": "./node_modules/.bin/mocha --recursive --require @babel/register src/tests",
+    "debug": "node --inspect-brk ./build/index.js"
   },
   "author": "Ifenna Ozoekwe-Awagu",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/register": "^7.8.3",
+    "@babel/runtime": "^7.8.4",
+    "@hapi/joi": "^17.1.0",
+    "bcrypt": "^3.0.8",
+    "chai": "^4.2.0",
+    "cors": "^2.8.5",
+    "debug": "^4.1.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.9.1",
+    "mysql2": "^2.1.0",
+    "sequelize": "^5.21.4",
+    "sinon": "^8.1.1"
+  },
+  "devDependencies": {
+    "mocha": "^7.0.1",
+    "nodemon": "^2.0.2"
+  }
 }
