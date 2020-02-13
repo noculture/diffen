@@ -1,0 +1,11 @@
+{
+  "name": "diffen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Ifenna Ozoekwe-Awagu",
+  "license": "ISC"
+}
