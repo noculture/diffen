@@ -8,7 +8,21 @@ export default class Differentiator {
     const file = fs.readFileSync(comparision, "utf-8");
     const fileTwo = fs.readFileSync(original, "utf-8");
 
-    this.compare(file, fileTwo);
+    const changes = this.compare(file, fileTwo);
+
+    if (changes.length === 1) return { similarityPercentage: 100, changes };
+
+    let words = 0;
+    let changedWords = 0;
+    changes.forEach(change => {
+      words += change.count;
+      if (change.added || change.removed) changedWords += change.count;
+    });
+
+    return {
+      similarityPercentage: ((words - changedWords) / words) * 100,
+      changes
+    };
   }
 
   compare(lineOne, lineTwo) {

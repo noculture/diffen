@@ -10,6 +10,17 @@ export default class Validator {
     return Validator.validate(schema, req, res, next);
   }
 
+  static comparisonRequest(req, res, next) {
+    const schema = Joi.object().keys({
+      firstStudent: Joi.string().required(),
+      firstUrl: Joi.string().required(),
+      secondStudent: Joi.string().required(),
+      secondUrl: Joi.string().required()
+    });
+
+    return Validator.validate(schema, req, res, next);
+  }
+
   static validate(schema, req, res, next) {
     const { error } = schema.validate(req.body, {
       allowUnknown: true,

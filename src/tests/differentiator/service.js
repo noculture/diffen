@@ -9,8 +9,8 @@ describe("Diff Service", () => {
       const fileOne = path.resolve("./src/tests/differentiator/one.txt");
       const fileTwo = path.resolve("./src/tests/differentiator/two.txt");
 
-      diff.readAndCompare(fileOne, fileTwo);
-      assert.equal(true, true);
+      const similarity = diff.readAndCompare(fileOne, fileTwo);
+      assert.equal(92.5925925925926, similarity.similarityPercentage);
     });
   });
 });

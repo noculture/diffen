@@ -8,6 +8,26 @@ class UserNotFound extends Error {
   }
 }
 
+class ComparisonNotFound extends Error {
+  static respond(res) {
+    res.status(404);
+    return res.json({
+      error: "NOT_FOUND",
+      message: "Comparison not found"
+    });
+  }
+}
+
+class FailedUpload extends Error {
+  static respond(res) {
+    res.status(401);
+    return res.json({
+      error: "FAILED_UPLOAD",
+      message: "The file upload failed"
+    });
+  }
+}
+
 class MalformedRoute extends Error {
   static respond(res) {
     res.status(400);
@@ -18,4 +38,4 @@ class MalformedRoute extends Error {
   }
 }
 
-export { UserNotFound, MalformedRoute };
+export { UserNotFound, FailedUpload, ComparisonNotFound, MalformedRoute };

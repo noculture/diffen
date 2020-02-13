@@ -2,6 +2,7 @@ import Sequelize from "sequelize";
 
 import config from "../config";
 import user from "../models/user";
+import comparison from "../models/comparison";
 
 // set up connection
 const engine = new Sequelize(config.dbName, config.dbUser, config.dbPass, {
@@ -19,6 +20,6 @@ const db = { Sequelize: Sequelize, engine: engine };
 
 // define models
 db.user = user(engine, Sequelize);
-// db.customer = require('../models/customer')(engine, Sequelize);
+db.comparison = comparison(engine, Sequelize);
 
 export default db;
