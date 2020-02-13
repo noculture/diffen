@@ -13,7 +13,7 @@ export default class Service {
     };
 
     try {
-      return await jwt.sign(payload, config.secret, { expiresIn: "1d" });
+      return jwt.sign(payload, config.secret, { expiresIn: "1d" });
     } catch (error) {
       debug("dev:auth:create-token")(error);
       throw error;

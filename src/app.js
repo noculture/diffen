@@ -3,8 +3,7 @@ import debug from "debug";
 import logger from "morgan";
 
 import config from "./config";
-
-// import route from "./routes";
+import route from "./routes";
 
 const app = express();
 logger.token(
@@ -17,7 +16,7 @@ app.use(express.json());
 
 const router = express.Router();
 
-// app.use("/", route(router));
+app.use("/", route(router));
 
 app.listen(config.port, () => {
   debug("dev:server")(`Listening on ${config.port}`);

@@ -1,16 +1,15 @@
 import Sequelize from "sequelize";
 
 import config from "../config";
+import user from "../models/user";
 
 // set up connection
 const engine = new Sequelize(config.dbName, config.dbUser, config.dbPass, {
   host: config.dbHost,
   dialect: "mysql",
-  operatorsAliases: false,
 
   pool: {
-    max: 5,
-    min: 0,
+    max: 15,
     acquire: 30000,
     idle: 10000
   }
@@ -19,7 +18,7 @@ const engine = new Sequelize(config.dbName, config.dbUser, config.dbPass, {
 const db = { Sequelize: Sequelize, engine: engine };
 
 // define models
-db.user = require("../models/user")(engine, Sequelize);
+db.user = user(engine, Sequelize);
 // db.customer = require('../models/customer')(engine, Sequelize);
 
 export default db;
