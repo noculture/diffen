@@ -8,8 +8,7 @@ export default class Service {
   static async createToken(user) {
     const payload = {
       id: user.id,
-      email: user.email,
-      is_admin: user.is_admin
+      name: user.name
     };
 
     try {
