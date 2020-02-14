@@ -1,11 +1,15 @@
 import AuthService from "../auth/service";
-import { users } from "../db";
+import db from "../db";
 import { UserNotFound, UserAlreadyExists } from "../errors/responses";
 
 export default class AuthController {
   static async signUp(req, res) {
+    console.log(db.users);
     try {
-      const result = await user.create(req.body);
+      const result = await db.users.create({
+        name: req.body.name,
+        password: await AuthService.hashPassword(req.body.password)
+      });
       const token = await AuthService.createToken(result);
       const response = AuthController.buildSuccessfulAuthResponse(
         result,
@@ -13,8 +17,6 @@ export default class AuthController {
       );
       return res.json(response);
     } catch (e) {
-      if (e.detail.includes("already exists"))
-        return UserAlreadyExists.respond(res);
       return res.status(500).json({
         status: "INTERNAL_ERROR",
         error: "Internal server error"
@@ -25,7 +27,7 @@ export default class AuthController {
   static async signIn(req, res) {
     let name = req.body.name;
     try {
-      const user = await users.findOne({
+      const user = await db.users.findOne({
         where: { name: name }
       });
 
@@ -38,11 +40,7 @@ export default class AuthController {
       const token = await AuthService.createToken(user);
       return res.json(AuthController.buildSuccessfulAuthResponse(user, token));
     } catch (error) {
-      if (error instanceof UserNotFound) return UserNotFound.respond(res);
-      return res.status(500).json({
-        status: "INTERNAL_ERROR",
-        error: "Internal server error"
-      });
+      return UserNotFound.respond(res);
     }
   }
 

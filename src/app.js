@@ -1,6 +1,7 @@
 import express from "express";
 import debug from "debug";
 import logger from "morgan";
+import fileUpload from "express-fileupload";
 
 import config from "./config";
 import route from "./routes";
@@ -13,6 +14,7 @@ logger.token(
 app.use(logger(":body"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(fileUpload());
 
 const router = express.Router();
 

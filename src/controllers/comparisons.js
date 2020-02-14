@@ -1,5 +1,5 @@
 import Differentiator from "../differentiator";
-import { comparison } from "../db";
+import db from "../db";
 import { MalformedRoute, ComparisonNotFound } from "../errors/responses";
 
 export default class ComparisonController {
@@ -10,7 +10,7 @@ export default class ComparisonController {
         req.body.firstUrl,
         req.body.secondUrl
       );
-      await comparison.create({
+      await db.comparison.create({
         firstStudentName: req.body.firstStudent,
         firstFileUrl: req.body.firstUrl,
         secondStudentName: req.body.secondStudent,
@@ -27,7 +27,7 @@ export default class ComparisonController {
   }
 
   static async getRecords(req, res) {
-    const details = await comparison.findAll({ limit: 100 });
+    const details = await db.comparison.findAll({ limit: 100 });
     res.json(details);
   }
 
@@ -35,14 +35,14 @@ export default class ComparisonController {
     if (Number.isNaN(Number(req.params.id))) throw new MalformedRoute();
     const diff = new Differentiator();
     try {
-      const details = await comparison.findOne({
+      const details = await db.comparison.findOne({
         where: { id: req.params.id }
       });
       const changes = diff.readAndCompare(
         details.firstFileUrl,
         details.secondFileUrl
       );
-      await comparison.update({ changes }, { where: { id: req.params.id } });
+      await db.comparison.update({ changes }, { where: { id: req.params.id } });
       return res.json(changes);
     } catch {
       return ComparisonNotFound.respond(res);

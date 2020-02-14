@@ -19,6 +19,14 @@ export default class Service {
     }
   }
 
+  static async hashPassword(password) {
+    try {
+      return await bcrypt.hash(password, 12);
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async userIsVerified(user, suppliedPassword) {
     try {
       return await bcrypt.compare(suppliedPassword, user.password);

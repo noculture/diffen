@@ -3,16 +3,22 @@ import { FailedUpload } from "../errors/responses";
 
 export default class UploadController {
   static async handleUpload(req, res) {
-    let file = req.files.file;
-    const url = path.resolve(`./uploads/${file.name}`);
+    try {
+      let file = req.files.file;
+      const url = path.resolve(`./uploads/${file.name}`);
 
-    file.mv(url, function(err) {
-      if (err) return FailedUpload.respond(res);
+      file.mv(url, function(err) {
+        if (err) return FailedUpload.respond(res);
 
-      res.json({
-        message: "success",
-        url
+        res.json({
+          message: "success",
+          url
+        });
       });
-    });
+    } catch (e) {
+      console.log(e);
+      // return FailedUpload.respond(res);
+      return res.json(e);
+    }
   }
 }

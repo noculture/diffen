@@ -17,7 +17,7 @@ export default (dbEngine, datatype) => {
       }
     },
     {
-      timestamps: true,
+      timestamps: false,
       tableName: "users",
       underscored: true
     }
