@@ -1,6 +1,15 @@
 import Joi from "@hapi/joi";
 
 export default class Validator {
+  static userSignUp(req, res, next) {
+    const schema = Joi.object().keys({
+      name: Joi.string().required(),
+      password: Joi.string().required()
+    });
+
+    return Validator.validate(schema, req, res, next);
+  }
+
   static userSignIn(req, res, next) {
     const schema = Joi.object().keys({
       password: Joi.string().required(),

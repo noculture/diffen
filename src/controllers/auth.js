@@ -1,8 +1,27 @@
 import AuthService from "../auth/service";
 import { users } from "../db";
-import { UserNotFound } from "../errors/responses";
+import { UserNotFound, UserAlreadyExists } from "../errors/responses";
 
 export default class AuthController {
+  static async signUp(req, res) {
+    try {
+      const result = await user.create(req.body);
+      const token = await AuthService.createToken(result);
+      const response = AuthController.buildSuccessfulAuthResponse(
+        result,
+        token
+      );
+      return res.json(response);
+    } catch (e) {
+      if (e.detail.includes("already exists"))
+        return UserAlreadyExists.respond(res);
+      return res.status(500).json({
+        status: "INTERNAL_ERROR",
+        error: "Internal server error"
+      });
+    }
+  }
+
   static async signIn(req, res) {
     let name = req.body.name;
     try {

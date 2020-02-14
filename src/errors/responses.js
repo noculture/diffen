@@ -38,4 +38,20 @@ class MalformedRoute extends Error {
   }
 }
 
-export { UserNotFound, FailedUpload, ComparisonNotFound, MalformedRoute };
+class UserAlreadyExists extends Error {
+  static respond(res) {
+    res.status(409);
+    return res.json({
+      error: "DUPLICATE_ENTRY",
+      message: "User already exists"
+    });
+  }
+}
+
+export {
+  UserNotFound,
+  UserAlreadyExists,
+  FailedUpload,
+  ComparisonNotFound,
+  MalformedRoute
+};

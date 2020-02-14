@@ -5,6 +5,7 @@ import AuthMiddleware from "../middleware/auth";
 import Validator from "../middleware/validations";
 
 export default function(router) {
+  router.post("/auth/signup", Validator.userSignUp, AuthController.signUp);
   router.post("/auth/signin", Validator.userSignIn, AuthController.signIn);
 
   router.post(
