@@ -1,0 +1,294 @@
+{
+	"info": {
+		"_postman_id": "e4034d6e-213b-4b51-9b97-1d70873492e2",
+		"name": "Diffen",
+		"description": "Set of requests for the text differentiator API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Sign up [Please add the token to the Authorization header of subsequent requests]",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Tom\",\n    \"password\": \"timbuktu\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://diffen22.herokuapp.com/auth/signup",
+					"protocol": "https",
+					"host": [
+						"diffen22",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign in [Please add the token to the Authorization header of subsequent requests]",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Tom\",\n    \"password\": \"timbuktu\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://diffen22.herokuapp.com/auth/signin",
+					"protocol": "https",
+					"host": [
+						"diffen22",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload file",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6IlRvbSIsImlhdCI6MTU4MTY3Nzk2OCwiZXhwIjoxNTgxNzY0MzY4fQ.6ayLV-40GDfHJvrbH9AoQsmp8FGYQo1nLDu9bzFLJfI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/home/ifenna/Projects/diffen/src/tests/differentiator/one.txt"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://diffen22.herokuapp.com/upload",
+					"protocol": "https",
+					"host": [
+						"diffen22",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload second file",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6IlRvbSIsImlhdCI6MTU4MTY3Nzk2OCwiZXhwIjoxNTgxNzY0MzY4fQ.6ayLV-40GDfHJvrbH9AoQsmp8FGYQo1nLDu9bzFLJfI"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/home/ifenna/Projects/diffen/src/tests/differentiator/two.txt"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://diffen22.herokuapp.com/upload",
+					"protocol": "https",
+					"host": [
+						"diffen22",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Make a comparison",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6IlRvbSIsImlhdCI6MTU4MTY3Nzk2OCwiZXhwIjoxNTgxNzY0MzY4fQ.6ayLV-40GDfHJvrbH9AoQsmp8FGYQo1nLDu9bzFLJfI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"firstStudent\": \"Ilya Prokopov\",\n        \"firstUrl\": \"/app/uploads/two.txt\",\n        \"secondStudent\": \"Adel Taraabt\",\n        \"secondUrl\": \"/app/uploads/one.txt\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://diffen22.herokuapp.com/comparisons",
+					"protocol": "https",
+					"host": [
+						"diffen22",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"comparisons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Rerun a comparison",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6IlRvbSIsImlhdCI6MTU4MTY3Nzk2OCwiZXhwIjoxNTgxNzY0MzY4fQ.6ayLV-40GDfHJvrbH9AoQsmp8FGYQo1nLDu9bzFLJfI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://diffen22.herokuapp.com/comparisons/1",
+					"protocol": "https",
+					"host": [
+						"diffen22",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"comparisons",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all previous comparisons",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6IlRvbSIsImlhdCI6MTU4MTY3Nzk2OCwiZXhwIjoxNTgxNzY0MzY4fQ.6ayLV-40GDfHJvrbH9AoQsmp8FGYQo1nLDu9bzFLJfI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://diffen22.herokuapp.com/comparisons",
+					"protocol": "https",
+					"host": [
+						"diffen22",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"comparisons"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
